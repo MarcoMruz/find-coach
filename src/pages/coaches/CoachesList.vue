@@ -2,7 +2,7 @@
   <section><CoachFilter @change-filter="setFilters" /></section>
   <VCard>
     <div class="controls">
-      <VButton mode="outline">Refresh</VButton>
+      <VButton mode="outline" @click="loadCoaches">Refresh</VButton>
       <VButton link to="/register" v-if="!isCoach">Become coach</VButton>
     </div>
     <ul v-if="hasCoaches">
@@ -38,6 +38,10 @@ export default {
     };
   },
 
+  created() {
+    this.loadCoaches();
+  },
+
   computed: {
     ...mapGetters('coaches', ['hasCoaches', 'isCoach']),
 
@@ -60,6 +64,10 @@ export default {
   methods: {
     setFilters(update) {
       this.activeFilters = update;
+    },
+
+    loadCoaches() {
+      this.$store.dispatch('coaches/loadCoaches');
     }
   }
 };
