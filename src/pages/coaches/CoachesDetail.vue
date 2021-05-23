@@ -1,27 +1,29 @@
 <template>
-  <section>
-    <VCard>
-      <h2>{{ fullName }}</h2>
-      <h3>${{ selectedCoach.hourlyRate }}/hour</h3>
-    </VCard>
-  </section>
+  <div>
+    <section>
+      <VCard>
+        <h2>{{ fullName }}</h2>
+        <h3>${{ selectedCoach.hourlyRate }}/hour</h3>
+      </VCard>
+    </section>
 
-  <section>
-    <VCard>
-      <header>
-        <h2>Intrested? Reach out now!</h2>
-        <VButton link :to="contactLink">Contact</VButton>
-      </header>
-      <router-view></router-view>
-    </VCard>
-  </section>
+    <section>
+      <VCard>
+        <header>
+          <h2>Intrested? Reach out now!</h2>
+          <VButton link :to="contactLink">Contact</VButton>
+        </header>
+        <router-view></router-view>
+      </VCard>
+    </section>
 
-  <section>
-    <VCard>
-      <VBadge v-for="area in areas" :key="area" :title="area" :type="area" />
-      <p>{{ selectedCoach.description }}</p>
-    </VCard>
-  </section>
+    <section>
+      <VCard>
+        <VBadge v-for="area in areas" :key="area" :title="area" :type="area" />
+        <p>{{ selectedCoach.description }}</p>
+      </VCard>
+    </section>
+  </div>
 </template>
 
 <script>

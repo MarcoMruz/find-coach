@@ -1,25 +1,27 @@
 <template>
-  <VDialog :show="!!error" title="An error occured" @close="closeModal">
-    <p>{{ error }}</p>
-  </VDialog>
-  <section><CoachFilter @change-filter="setFilters" /></section>
-  <VCard v-if="isLoading">
-    <VSpinner />
-  </VCard>
-  <VCard v-else>
-    <div class="controls">
-      <VButton mode="outline" @click="loadCoaches(true)">Refresh</VButton>
-      <VButton link to="/register" v-if="!isCoach">Become coach</VButton>
-    </div>
-    <ul v-if="hasCoaches">
-      <CoachItem
-        v-for="coach in filteredCoaches"
-        :key="coach.id"
-        :coach="coach"
-      />
-    </ul>
-    <div v-else>no coaches here</div>
-  </VCard>
+  <div>
+    <VDialog :show="!!error" title="An error occured" @close="closeModal">
+      <p>{{ error }}</p>
+    </VDialog>
+    <section><CoachFilter @change-filter="setFilters" /></section>
+    <VCard v-if="isLoading">
+      <VSpinner />
+    </VCard>
+    <VCard v-else>
+      <div class="controls">
+        <VButton mode="outline" @click="loadCoaches(true)">Refresh</VButton>
+        <VButton link to="/register" v-if="!isCoach">Become coach</VButton>
+      </div>
+      <ul v-if="hasCoaches">
+        <CoachItem
+          v-for="coach in filteredCoaches"
+          :key="coach.id"
+          :coach="coach"
+        />
+      </ul>
+      <div v-else>no coaches here</div>
+    </VCard>
+  </div>
 </template>
 
 <script>

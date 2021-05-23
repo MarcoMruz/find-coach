@@ -1,28 +1,30 @@
 <template>
-  <VDialog :show="!!error" title="An error occured" @close="closeModal">
-    <p>{{ error }}</p>
-  </VDialog>
+  <div>
+    <VDialog :show="!!error" title="An error occured" @close="closeModal">
+      <p>{{ error }}</p>
+    </VDialog>
 
-  <VCard>
-    <header>
-      <h2>Requests received</h2>
-    </header>
+    <VCard>
+      <header>
+        <h2>Requests received</h2>
+      </header>
 
-    <VSpinner v-if="isLoading" />
+      <VSpinner v-if="isLoading" />
 
-    <section v-else>
-      <ul v-if="hasRequests">
-        <RequestItem
-          v-for="request in requests"
-          :key="request.id"
-          :email="request.email"
-          :message="request.message"
-        />
-      </ul>
+      <section v-else>
+        <ul v-if="hasRequests">
+          <RequestItem
+            v-for="request in requests"
+            :key="request.id"
+            :email="request.email"
+            :message="request.message"
+          />
+        </ul>
 
-      <h3 v-else>You don't have any requests as of now!</h3>
-    </section>
-  </VCard>
+        <h3 v-else>You don't have any requests as of now!</h3>
+      </section>
+    </VCard>
+  </div>
 </template>
 
 <script>
