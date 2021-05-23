@@ -8,7 +8,7 @@
   </VCard>
   <VCard v-else>
     <div class="controls">
-      <VButton mode="outline" @click="loadCoaches">Refresh</VButton>
+      <VButton mode="outline" @click="loadCoaches(true)">Refresh</VButton>
       <VButton link to="/register" v-if="!isCoach">Become coach</VButton>
     </div>
     <ul v-if="hasCoaches">
@@ -74,10 +74,10 @@ export default {
       this.activeFilters = update;
     },
 
-    async loadCoaches() {
+    async loadCoaches(forceRefresh = false) {
       this.isLoading = true;
       try {
-        await this.$store.dispatch('coaches/loadCoaches');
+        await this.$store.dispatch('coaches/loadCoaches', { forceRefresh });
       } catch (error) {
         this.error = error || 'Oops something went wrong!';
       }

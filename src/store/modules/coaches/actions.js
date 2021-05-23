@@ -27,7 +27,9 @@ export default {
     });
   },
 
-  async loadCoaches(context) {
+  async loadCoaches(context, { forceRefresh }) {
+    if (!forceRefresh && !context.getters.shouldUpdate) return;
+
     const response = await fetch(`${API_URL}/coaches.json`);
     const data = await response.json();
 
@@ -50,5 +52,6 @@ export default {
     }
 
     context.commit('setCoaches', coaches);
+    context.commit('setFetchTimestamp');
   }
 };
