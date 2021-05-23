@@ -17,7 +17,26 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      email: '',
+      message: ''
+    };
+  },
+
+  methods: {
+    handleSubmit() {
+      this.$store.dispatch('requests/sendMessage', {
+        coachId: this.$route.params.id,
+        email: this.email,
+        message: this.message
+      });
+
+      this.$router.replace('/coaches');
+    }
+  }
+};
 </script>
 
 <style scoped>
