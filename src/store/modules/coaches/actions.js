@@ -31,7 +31,8 @@ export default {
     const response = await fetch(`${API_URL}/coaches.json`);
     const data = await response.json();
 
-    if (!response.ok) return;
+    if (!response.ok)
+      throw new Error(data.message || 'Failed to fetch data from server!');
 
     const coaches = [];
 

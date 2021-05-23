@@ -1,6 +1,12 @@
 <template>
+  <VDialog :show="!!error" title="An error occured" @close="closeModal">
+    <p>{{ error }}</p>
+  </VDialog>
   <section><CoachFilter @change-filter="setFilters" /></section>
-  <VCard>
+  <VCard v-if="isLoading">
+    <VSpinner />
+  </VCard>
+  <VCard v-else>
     <div class="controls">
       <VButton mode="outline" @click="loadCoaches">Refresh</VButton>
       <VButton link to="/register" v-if="!isCoach">Become coach</VButton>
@@ -34,7 +40,9 @@ export default {
         frontend: true,
         backend: true,
         career: true
-      }
+      },
+      isLoading: false,
+      error: null
     };
   },
 
@@ -66,8 +74,18 @@ export default {
       this.activeFilters = update;
     },
 
-    loadCoaches() {
-      this.$store.dispatch('coaches/loadCoaches');
+    async loadCoaches() {
+      this.isLoading = true;
+      try {
+        await this.$store.dispatch('coaches/loadCoaches');
+      } catch (error) {
+        this.error = error || 'Oops something went wrong!';
+      }
+      this.isLoading = false;
+    },
+
+    closeModal() {
+      this.error = null;
     }
   }
 };
