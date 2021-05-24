@@ -1,18 +1,30 @@
-import { AUTH_API_URL } from '../../../../config';
+import { AUTH_API_URL_LOG, AUTH_API_URL_REG } from '../../../../config';
 
 export default {
-  // login(context, payload) {},
+  async login(context, payload) {
+    let data = null;
+
+    try {
+      data = await handleSignIn(AUTH_API_URL_LOG, payload);
+    } catch (error) {
+      throw new Error(error);
+    }
+
+    context.commit('setUser', {
+      token: data.idToken,
+      userId: data.localId,
+      tokenExpiration: data.expiresIn
+    });
+  },
 
   async signup(context, payload) {
-    const response = await fetch(AUTH_API_URL, {
-      method: 'POST',
-      body: JSON.stringify(payload),
-      returnSecureToken: true
-    });
+    let data = null;
 
-    const data = await response.json();
-
-    if (!response.ok) throw new Error(data.message || 'Failed to register.');
+    try {
+      data = await handleSignIn(AUTH_API_URL_REG, payload);
+    } catch (error) {
+      throw new Error(error);
+    }
 
     context.commit('setUser', {
       token: data.idToken,
@@ -21,3 +33,17 @@ export default {
     });
   }
 };
+
+async function handleSignIn(url, payload) {
+  const response = await fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+    returnSecureToken: true
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) throw new Error(data.message || 'Failed to register.');
+
+  return data;
+}

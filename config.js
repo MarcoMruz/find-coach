@@ -3,4 +3,5 @@ export const API_URL =
 
 const API_KEY = 'AIzaSyBucTPEargcjMorVtnfE6fXLGrpz2JyCxc';
 
-export const AUTH_API_URL = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+export const AUTH_API_URL_REG = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`;
+export const AUTH_API_URL_LOG = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`;
