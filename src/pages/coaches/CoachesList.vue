@@ -10,7 +10,7 @@
     <VCard v-else>
       <div class="controls">
         <VButton mode="outline" @click="loadCoaches(true)">Refresh</VButton>
-        <VButton v-if="!isLoggedIn" link to="/auth">Login</VButton>
+        <VButton v-if="!isLoggedIn" link to="/auth?r=register">Login</VButton>
         <VButton link to="/register" v-if="isLoggedIn && !isCoach"
           >Become coach</VButton
         >

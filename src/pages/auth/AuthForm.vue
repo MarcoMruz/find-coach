@@ -67,6 +67,9 @@ export default {
         this.mode === 'login'
           ? await this.$store.dispatch('login', user)
           : await this.$store.dispatch('signup', user);
+
+        const redirect = this.$route.query.r || 'coaches';
+        this.$router.replace(`/${redirect}`);
       } catch (error) {
         this.error = error.message || 'Something went wrong. Try again later';
       } finally {
