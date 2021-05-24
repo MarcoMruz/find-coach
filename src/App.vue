@@ -11,7 +11,22 @@
 import VHeader from './components/layouts/VHeader';
 
 export default {
-  components: { VHeader }
+  components: { VHeader },
+  created() {
+    this.$store.dispatch('tryLogin');
+  },
+
+  computed: {
+    autoLogout() {
+      return this.$store.getters.autoLogout;
+    }
+  },
+
+  watch: {
+    autoLogout(curValue, oldValue) {
+      if (curValue && curValue !== oldValue) this.$router.replace('/coaches');
+    }
+  }
 };
 </script>
 
