@@ -10,7 +10,10 @@
     <VCard v-else>
       <div class="controls">
         <VButton mode="outline" @click="loadCoaches(true)">Refresh</VButton>
-        <VButton link to="/register" v-if="!isCoach">Become coach</VButton>
+        <VButton v-if="!isLoggedIn" link to="/auth">Login</VButton>
+        <VButton link to="/register" v-if="isLoggedIn && !isCoach"
+          >Become coach</VButton
+        >
       </div>
       <ul v-if="hasCoaches">
         <CoachItem
@@ -68,6 +71,10 @@ export default {
 
         return hasBadges.some(badge => badge === true);
       });
+    },
+
+    isLoggedIn() {
+      return this.$store.getters.isAuthenticated;
     }
   },
 
