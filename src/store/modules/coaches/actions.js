@@ -11,13 +11,18 @@ export default {
       hourlyRate: data.rate
     };
 
-    const response = await fetch(`${API_URL}/coaches/${userId}.json`, {
-      method: 'PUT',
-      body: JSON.stringify(coach),
-      headers: {
-        'Content-Type': 'application/json'
+    const token = context.rootGetters.token;
+
+    const response = await fetch(
+      `${API_URL}/coaches/${userId}.json?auth=${token}`,
+      {
+        method: 'PUT',
+        body: JSON.stringify(coach),
+        headers: {
+          'Content-Type': 'application/json'
+        }
       }
-    });
+    );
 
     if (!response.ok) return;
 

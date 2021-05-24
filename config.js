@@ -1,5 +1,5 @@
 export const API_URL =
-  'https://svelte-todo-88b77-default-rtdb.europe-west1.firebasedatabase.app/';
+  'https://svelte-todo-88b77-default-rtdb.europe-west1.firebasedatabase.app';
 
 const API_KEY = 'AIzaSyBucTPEargcjMorVtnfE6fXLGrpz2JyCxc';
 

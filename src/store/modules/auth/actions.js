@@ -37,8 +37,11 @@ export default {
 async function handleSignIn(url, payload) {
   const response = await fetch(url, {
     method: 'POST',
-    body: JSON.stringify(payload),
-    returnSecureToken: true
+    'Content-Type': 'application/json',
+    body: JSON.stringify({
+      ...payload,
+      returnSecureToken: true
+    })
   });
 
   const data = await response.json();

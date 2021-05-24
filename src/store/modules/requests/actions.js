@@ -25,8 +25,13 @@ export default {
 
   async loadRequests(context) {
     const userId = context.rootGetters.userId;
-    const response = await fetch(`${API_URL}/requests/${userId}.json`);
+    const token = context.rootGetters.token;
+    const response = await fetch(
+      `${API_URL}/requests/${userId}.json?auth=${token}`
+    );
     const data = await response.json();
+
+    console.log(data);
 
     if (!response.ok)
       throw new Error(data.message || 'Oops problem with loading requests...');
