@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, defineAsyncComponent } from 'vue';
 
 import router from './router';
 import store from './store/index.js';
@@ -8,7 +8,11 @@ import VCard from './components/ui/VCard.vue';
 import VBadge from './components/ui/VBadge.vue';
 import VButton from './components/ui/VButton.vue';
 import VSpinner from './components/ui/VSpinner.vue';
-import VDialog from './components/ui/VDialog.vue';
+// import VDialog from './components/ui/VDialog.vue';
+
+const VDialog = defineAsyncComponent(() =>
+  import('./components/ui/VDialog.vue')
+);
 
 const app = createApp(App);
 
