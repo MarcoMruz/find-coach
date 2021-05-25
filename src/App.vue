@@ -14,7 +14,6 @@ export default {
   components: { VHeader },
   created() {
     this.$store.dispatch('tryLogin');
-    console.log(process.env.FIREBASE_DB_URL);
   },
 
   computed: {
